@@ -21,22 +21,22 @@ jobs:
           npm ci
         if: ${{ matrix.environment == 'node' }}
 
-      - name: Prepare puppeteeer SUID sandbox
-        id: sandbox
-        run: |
-          SANDBOX=$(find ~/.cache/puppeteer -type f -name chrome_sandbox | head -n1)
-          sudo chown root:root "$SANDBOX"
-          sudo chmod 4755 "$SANDBOX"
-          echo "sandbox_path=$SANDBOX" >> "$GITHUB_OUTPUT"
+      # - name: Prepare puppeteeer SUID sandbox
+      #   id: sandbox
+      #   run: |
+      #     SANDBOX=$(find ~/.cache/puppeteer -type f -name chrome_sandbox | head -n1)
+      #     sudo chown root:root "$SANDBOX"
+      #     sudo chmod 4755 "$SANDBOX"
+      #     echo "sandbox_path=$SANDBOX" >> "$GITHUB_OUTPUT"
 
       - run: |
           bun run task:bun
-        env:
-          CHROME_DEVEL_SANDBOX: ${{ steps.sandbox.outputs.sandbox_path }}
+        # env:
+        #   CHROME_DEVEL_SANDBOX: ${{ steps.sandbox.outputs.sandbox_path }}
         if: ${{ matrix.environment == 'bun' }}
 
       - run: |
           npm run task:node
-        env:
-          CHROME_DEVEL_SANDBOX: ${{ steps.sandbox.outputs.sandbox_path }}
+        # env:
+        #   CHROME_DEVEL_SANDBOX: ${{ steps.sandbox.outputs.sandbox_path }}
         if: ${{ matrix.environment == 'node' }}
