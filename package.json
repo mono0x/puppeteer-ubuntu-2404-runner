@@ -1,0 +1,19 @@
+{
+  "name": "puppeteer-ubuntu-2404-runner",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "task:bun": "bun run index.ts",
+    "task:node": "node --experimental-strip-types index.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^24.21.0"
+  }
+}
